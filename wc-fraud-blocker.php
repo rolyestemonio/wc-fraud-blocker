@@ -3,7 +3,7 @@
  * Plugin Name:       WC Fraud Blocker
  * Plugin URI:        https://github.com/rolyestemonio/wc-fraud-blocker
  * Description:       Block fraudulent customers by email and shipping/billing address in WooCommerce.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Roly Estemonio
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'WCFB_VERSION',     '1.0.0' );
+define( 'WCFB_VERSION',     '1.0.1' );
 define( 'WCFB_PLUGIN_FILE', __FILE__ );
 define( 'WCFB_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'WCFB_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
@@ -56,6 +56,16 @@ function wcfb_init(): void {
     WCFB_Ajax::instance()->register();
 }
 add_action( 'plugins_loaded', 'wcfb_init' );
+
+/**
+ * Declare compatibility with WooCommerce features.
+ */
+add_action( 'before_woocommerce_init', function () {
+    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', WCFB_PLUGIN_FILE, true );
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', WCFB_PLUGIN_FILE, true );
+    }
+} );
 
 /**
  * Create option defaults on activation.
