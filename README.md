@@ -2,10 +2,6 @@
 
 A lightweight WordPress plugin for WooCommerce that helps prevent fraudulent orders by blocking suspicious customers based on email addresses and shipping addresses.
 
-**Version:** 1.0.0  
-**Author:** [Roly Estemonio](https://rolyestemonio.website)  
-**License:** GPL-2.0-or-later
-
 ## Description
 
 WC Fraud Blocker provides a simple yet effective way to manage fraud prevention in your WooCommerce store. Add email addresses or shipping addresses to a blocklist, and the plugin automatically prevents those customers from:
